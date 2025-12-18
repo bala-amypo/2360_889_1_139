@@ -10,9 +10,16 @@ public class User{
     private String name;
     private String accreitationLevel;
     private String country;
-    private Boolean active
+    private Boolean active;
+    
     }
-     return id;
+     public User(Long id, String name, String accreitationLevel, String country, Boolean active) {
+      this.id = id;
+      this.name = name;
+      this.accreitationLevel = accreitationLevel;
+      this.country = country;
+      this.active = active;
+   }
     public String getName() {
        return name;
     }
