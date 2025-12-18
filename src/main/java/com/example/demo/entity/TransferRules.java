@@ -9,6 +9,6 @@ public class TransferRules{
     private Int creditHourDifference;
     private Boolean isEligibleForTransfer;
     private TimeStamp evaluatedAT;
-    private String 
+    private String notes;
 
 }
