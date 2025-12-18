@@ -4,11 +4,11 @@ import jakarta presistence.*;
 
 public class TransferRules{
     @Id
+    GenratedValue(Strategy=GenrationType.IDENTITY)
     private Long id;
     private Double overlapPercentage;
     private Int creditHourDifference;
     private Boolean isEligibleForTransfer;
-    private TimeStamp evaluatedAT;
     private String notes;
 
 }

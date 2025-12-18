@@ -5,6 +5,7 @@ import jakarta.presistence.*;
 
 public class User{
    @Id
+   GenratedValue(Strategy=GenrationType.IDENTITY)
     private Long id;
    @Coloumn(unique=true) 
     private String name;

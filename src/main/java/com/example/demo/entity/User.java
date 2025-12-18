@@ -40,13 +40,9 @@ public class User{
     }
     public String getPassword() {
         return password;
-    }
-    public Set<String> getRoels() {
-        return roels;
+    
     }
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    private Set<String> roels;
-    private LocalDateTime createdAt;
 }
