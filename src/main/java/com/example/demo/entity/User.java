@@ -12,3 +12,4 @@ public class User{
     private String country;
     private Boolean active
     }
+    
