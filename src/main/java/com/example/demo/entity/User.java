@@ -5,6 +5,7 @@ import jakarta.presistence.*;
 
 public class User{
     @Id
+    GenratedValue(Strategy=GenrationType.IDENTITY)
     private Long id;
     @Column(unique=true)
     private String email;
@@ -13,7 +14,7 @@ public class User{
         this.id = id;
         this.email = email;
         this.password = password;
-        this.roels = roels;
+        this.roles= roles;
         this.createdAt = createdAt;
     }
     public Long getId() {
@@ -28,8 +29,8 @@ public class User{
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setRoels(Set<String> roels) {
-        this.roels = roels;
+    public void setRoles(Set<String> roles) {
+        this.roles= roles;
     }
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
