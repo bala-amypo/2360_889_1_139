@@ -1,5 +1,6 @@
 public interface UniversityService{
-    public University createUniversity(University univ);
-    
-
+    public void createUniversity(University univ);
+    public University updateUniversity()
+    List
+    University
 }
