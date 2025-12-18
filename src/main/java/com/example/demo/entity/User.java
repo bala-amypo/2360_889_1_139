@@ -1,2 +1,5 @@
 package com.example.demo.entity;
-import jakarta.pre
+
+public class User{
+
+}
