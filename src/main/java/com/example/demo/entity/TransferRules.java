@@ -7,6 +7,8 @@ public class TransferRules{
     private Long id;
     private Double overlapPercentage;
     private Int creditHourDifference;
-    private
+    private Boolean isEligibleForTransfer;
+    private TimeStamp evaluatedAT;
+    private String 
 
 }
