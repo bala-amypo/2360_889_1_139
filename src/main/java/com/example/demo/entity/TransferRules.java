@@ -1,52 +1,64 @@
-package.com.example.demo.entity;
+package com.example.demo.entity;
 
-import jakarta presistence.*;
+import jakarta.persistence.*;
 
-public class TransferRules{
+@Entity
+@Table(name = "transfer_rules")
+public class TransferRule {
+
     @Id
-    GenratedValue(Strategy=GenrationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double overlapPercentage;
-    private Int creditHourDifference;
-    private Boolean isEligibleForTransfer;
-    private String notes;
-    public TransferRules(Long id, Double overlapPercentage, Int creditHourDifference, Boolean isEligibleForTransfer,
-            String notes) {
-        this.id = id;
-        this.overlapPercentage = overlapPercentage;
-        this.creditHourDifference = creditHourDifference;
-        this.isEligibleForTransfer = isEligibleForTransfer;
-        this.notes = notes;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setOverlapPercentage(Double overlapPercentage) {
-        this.overlapPercentage = overlapPercentage;
-    }
-    public void setCreditHourDifference(Int creditHourDifference) {
-        this.creditHourDifference = creditHourDifference;
-    }
-    public void setIsEligibleForTransfer(Boolean isEligibleForTransfer) {
-        this.isEligibleForTransfer = isEligibleForTransfer;
-    }
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-    public Long getId() {
-        return id;
-    }
-    public Double getOverlapPercentage() {
-        return overlapPercentage;
-    }
-    public Int getCreditHourDifference() {
-        return creditHourDifference;
-    }
-    public Boolean getIsEligibleForTransfer() {
-        return isEligibleForTransfer;
-    }
-    public String getNotes() {
-        return notes;
+
+    @ManyToOne
+    @JoinColumn(name = "source_university_id", nullable = false)
+    private University sourceUniversity;
+
+    @ManyToOne
+    @JoinColumn(name = "target_university_id", nullable = false)
+    private University targetUniversity;
+
+    private Double minimumOverlapPercentage;
+    private Integer creditHourTolerance;
+    private Boolean active = true;
+
+    public TransferRule() {}
+
+    public TransferRule(University sourceUniversity, University targetUniversity,
+                        Double minimumOverlapPercentage, Integer creditHourTolerance) {
+        this.sourceUniversity = sourceUniversity;
+        this.targetUniversity = targetUniversity;
+        this.minimumOverlapPercentage = minimumOverlapPercentage;
+        this.creditHourTolerance = creditHourTolerance;
+        this.active = true;
     }
 
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public University getSourceUniversity() { return sourceUniversity; }
+    public void setSourceUniversity(University sourceUniversity) {
+        this.sourceUniversity = sourceUniversity;
+    }
+
+    public University getTargetUniversity() { return targetUniversity; }
+    public void setTargetUniversity(University targetUniversity) {
+        this.targetUniversity = targetUniversity;
+    }
+
+    public Double getMinimumOverlapPercentage() {
+        return minimumOverlapPercentage;
+    }
+
+    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
+        this.minimumOverlapPercentage = minimumOverlapPercentage;
+    }
+
+    public Integer getCreditHourTolerance() { return creditHourTolerance; }
+    public void setCreditHourTolerance(Integer creditHourTolerance) {
+        this.creditHourTolerance = creditHourTolerance;
+    }
+
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }

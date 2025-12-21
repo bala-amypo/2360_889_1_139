@@ -1,52 +1,45 @@
-package.com.example.demo.entity;
+package com.example.demo.entity;
 
-import jakarta.presistence.*;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "universities", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+public class University {
 
-public class User{
-   @Id
-   GenratedValue(Strategy=GenrationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   @Coloumn(unique=true) 
+
+    @Column(nullable = false, unique = true)
     private String name;
-    private String accreitationLevel;
+
+    private String accreditationLevel;
     private String country;
-    private Boolean active;
-    public Long getId(){
-        return id;
+    private Boolean active = true;
+
+    public University() {}
+
+    public University(String name, String accreditationLevel, String country) {
+        this.name = name;
+        this.accreditationLevel = accreditationLevel;
+        this.country = country;
+        this.active = true;
     }
-     public User(Long id, String name, String accreitationLevel, String country, Boolean active) {
-      this.id = id;
-      this.name = name;
-      this.accreitationLevel = accreitationLevel;
-      this.country = country;
-      this.active = active;
-   }
-    public String getName() {
-       return name;
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getAccreditationLevel() { return accreditationLevel; }
+    public void setAccreditationLevel(String accreditationLevel) {
+        this.accreditationLevel = accreditationLevel;
     }
-    public String getAccreitationLevel() {
-       return accreitationLevel;
-    }
-    public void setId(Long id) {
-      this.id = id;
-   }
-    public void setName(String name) {
-       this.name = name;
-    }
-    public void setAccreitationLevel(String accreitationLevel) {
-       this.accreitationLevel = accreitationLevel;
-    }
-    public void setCountry(String country) {
-       this.country = country;
-    }
-    public void setActive(Boolean active) {
-       this.active = active;
-    }
-    public String getCountry() {
-       return country;
-    }
-    public Boolean getActive() {
-       return active;
-    }
-    }
+
+    public String getCountry() { return country; }
+    public void setCountry(String country) { this.country = country; }
+
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
+}
