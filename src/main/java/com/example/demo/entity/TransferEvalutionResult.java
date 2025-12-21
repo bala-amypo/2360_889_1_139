@@ -1,43 +1,80 @@
-package.com.example.demo.entity;
+package com.example.demo.entity;
 
-import jakarta presistence.*;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
-public class TransferEvalutionResult{
+@Entity
+@Table(name = "transfer_evaluation_results")
+public class TransferEvaluationResult {
+
     @Id
-    GenratedValue(Strategy=GenrationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double minimumOverlapPercentage;
-    private Int creditHourTolerance;
-    private Boolean active;
-    public TransferEvalutionResult(Long id, Double minimumOverlapPercentage, Int creditHourTolerance, Boolean active) {
-        this.id = id;
-        this.minimumOverlapPercentage = minimumOverlapPercentage;
-        this.creditHourTolerance = creditHourTolerance;
-        this.active = active;
-    }
-    public Long getId() {
-        return id;
-    }
-    public Double getMinimumOverlapPercentage() {
-        return minimumOverlapPercentage;
-    }
-    public Int getCreditHourTolerance() {
-        return creditHourTolerance;
-    }
-    public Boolean getActive() {
-        return active;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setMinimumOverlapPercentage(Double minimumOverlapPercentage) {
-        this.minimumOverlapPercentage = minimumOverlapPercentage;
-    }
-    public void setCreditHourTolerance(Int creditHourTolerance) {
-        this.creditHourTolerance = creditHourTolerance;
-    }
-    public void setActive(Boolean active) {
-        this.active = active;
+
+    @ManyToOne
+    private Course sourceCourse;
+
+    @ManyToOne
+    private Course targetCourse;
+
+    private Double overlapPercentage;
+    private Integer creditHourDifference;
+    private Boolean isEligibleForTransfer;
+    private LocalDateTime evaluatedAt;
+    private String notes;
+
+    public TransferEvaluationResult() {}
+
+    public TransferEvaluationResult(Course sourceCourse, Course targetCourse,
+                                    Double overlapPercentage, Integer creditHourDifference,
+                                    Boolean isEligibleForTransfer, String notes) {
+        this.sourceCourse = sourceCourse;
+        this.targetCourse = targetCourse;
+        this.overlapPercentage = overlapPercentage;
+        this.creditHourDifference = creditHourDifference;
+        this.isEligibleForTransfer = isEligibleForTransfer;
+        this.notes = notes;
+        this.evaluatedAt = LocalDateTime.now();
     }
 
+    @PrePersist
+    public void onCreate() {
+        evaluatedAt = LocalDateTime.now();
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Course getSourceCourse() { return sourceCourse; }
+    public void setSourceCourse(Course sourceCourse) {
+        this.sourceCourse = sourceCourse;
+    }
+
+    public Course getTargetCourse() { return targetCourse; }
+    public void setTargetCourse(Course targetCourse) {
+        this.targetCourse = targetCourse;
+    }
+
+    public Double getOverlapPercentage() { return overlapPercentage; }
+    public void setOverlapPercentage(Double overlapPercentage) {
+        this.overlapPercentage = overlapPercentage;
+    }
+
+    public Integer getCreditHourDifference() { return creditHourDifference; }
+    public void setCreditHourDifference(Integer creditHourDifference) {
+        this.creditHourDifference = creditHourDifference;
+    }
+
+    public Boolean getIsEligibleForTransfer() {
+        return isEligibleForTransfer;
+    }
+
+    public void setIsEligibleForTransfer(Boolean eligible) {
+        isEligibleForTransfer = eligible;
+    }
+
+    public LocalDateTime getEvaluatedAt() { return evaluatedAt; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
 }
